@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NutriSafe - Instant personalized nutritional risk analysis for food products. Make safer food choices tailored to your health.">
+    <title>NutriSafe - Your Personal Food Safety Guardian</title>
+    <link rel="stylesheet" href="assets/styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1abc9c;
+            --primary-dark: #16a085;
+            --secondary: #34495e;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --bg-light: #ecf0f1;
+            --white: #ffffff;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+            --success: #27ae60;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Header/Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            min-height: 90vh;
+            background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            from { transform: translateY(0); }
+            to { transform: translateY(-100px); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.4s backwards;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary);
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 1s ease 0.6s backwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .phone-mockup {
+            width: 100%;
+            max-width: 300px;
+            animation: float-phone 3s ease-in-out infinite;
+        }
+
+        @keyframes float-phone {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            background: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 6rem 2rem;
+            background: var(--bg-light);
+        }
+
+        .steps {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+        }
+
+        .step h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .step p {
+            color: var(--text-light);
+        }
+
+        /* Health Profiles */
+        .health-profiles {
+            padding: 6rem 2rem;
+            background: var(--white);
+        }
+
+        .profiles-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .profile-badge {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            padding: 1.5rem 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+            min-width: 200px;
+            flex: 0 1 auto;
+        }
+
+        .profile-badge:hover {
+            transform: scale(1.05);
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 2rem;
+            background: var(--secondary);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .footer-section a:hover {
+            opacity: 1;
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.7;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .stat-item h3 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="assets/images/logo.png" alt="NutriSafe Logo" class="logo-img">
+                <span>NutriSafe</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#profiles">Health Profiles</a></li>
+                <li><a href="#download">Download</a></li>
+            </ul>
+            <button class="mobile-menu" onclick="toggleMenu()">☰</button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Your Personal Food Safety Guardian</h1>
+                <p>Scan any food product and get instant, personalized nutritional risk analysis. Make safer choices tailored to your health in under 4 seconds.</p>
+                <div class="cta-buttons">
+                    <a href="#download" class="btn btn-primary">📱 Download App</a>
+                    <a href="#how-it-works" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <svg class="phone-mockup" viewBox="0 0 300 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="10" width="280" height="580" rx="40" fill="white" stroke="#ddd" stroke-width="2"/>
+                    <rect x="30" y="80" width="240" height="480" rx="10" fill="#f8f9fa"/>
+                    <circle cx="150" cy="50" r="8" fill="#ddd"/>
+                    <rect x="50" y="120" width="200" height="60" rx="10" fill="url(#phone-gradient)"/>
+                    <text x="150" y="155" text-anchor="middle" fill="white" font-size="20" font-weight="bold">Scan Product</text>
+                    <rect x="50" y="200" width="200" height="100" rx="10" fill="#1abc9c" opacity="0.1"/>
+                    <circle cx="150" cy="250" r="30" fill="#1abc9c"/>
+                    <path d="M140 250L148 258L162 244" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <rect x="50" y="320" width="80" height="40" rx="8" fill="#27ae60"/>
+                    <rect x="140" y="320" width="80" height="40" rx="8" fill="#f39c12"/>
+                    <rect x="50" y="370" width="80" height="40" rx="8" fill="#e74c3c"/>
+                    <defs>
+                        <linearGradient id="phone-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#1abc9c"/>
+                            <stop offset="100%" style="stop-color:#16a085"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="section-title">
+            <h2>Powerful Features for Your Health</h2>
+            <p>Everything you need to make informed food choices in one simple app</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📸</div>
+                <h3>Instant Scanning</h3>
+                <p>Scan barcodes or ingredient lists with your camera. Get results in under 4 seconds.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Personalized Analysis</h3>
+                <p>Tailored recommendations based on your health conditions: diabetes, hypertension, weight goals.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔬</div>
+                <h3>Smart Detection</h3>
+                <p>Automatic identification of sugars, salts, fats, and 4,400+ additives from scientific databases.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">✅</div>
+                <h3>Simple Scoring</h3>
+                <p>Clear Green/Orange/Red ratings for each nutrient, plus an overall safety score.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Scan History</h3>
+                <p>Track all your scanned products and monitor your nutritional choices over time.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌍</div>
+                <h3>Global Database</h3>
+                <p>Powered by EFSA, FDA, WHO data sources with 4,400+ nutrients and additives.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="section-title">
+            <h2>How It Works</h2>
+            <p>Three simple steps to safer food choices</p>
+        </div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Scan</h3>
+                <p>Point your camera at the product barcode or ingredient list</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Analyze</h3>
+                <p>Our AI engine processes nutrition data and matches ingredients to health databases</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Decide</h3>
+                <p>Get instant personalized recommendations: safe, moderate, or avoid</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Health Profiles -->
+    <section id="profiles" class="health-profiles">
+        <div class="section-title">
+            <h2>Personalized for Your Health</h2>
+            <p>Choose your health profile for tailored recommendations</p>
+        </div>
+        <div class="profiles-grid">
+            <div class="profile-badge">🩺 Diabetes</div>
+            <div class="profile-badge">💓 Hypertension</div>
+            <div class="profile-badge">🏃 Weight Loss</div>
+            <div class="profile-badge">💪 Athletic</div>
+            <div class="profile-badge">👶 Pregnancy</div>
+            <div class="profile-badge">🌱 Vegan</div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>4,400+</h3>
+                <p>Nutrients & Additives</p>
+            </div>
+            <div class="stat-item">
+                <h3>&lt;4s</h3>
+                <p>Analysis Speed</p>
+            </div>
+            <div class="stat-item">
+                <h3>6</h3>
+                <p>Health Profiles</p>
+            </div>
+            <div class="stat-item">
+                <h3>100%</h3>
+                <p>Privacy Protected</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="download" class="cta-section">
+        <h2>Ready to Make Safer Food Choices?</h2>
+        <p>Download NutriSafe today and take control of your nutrition</p>
+        <div class="cta-buttons" style="justify-content: center;">
+            <a href="#" class="btn btn-primary">📱 App Store</a>
+            <a href="#" class="btn btn-primary">🤖 Google Play</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>NutriSafe</h3>
+                <p>Your personal food safety guardian. Make informed choices for a healthier life.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Product</h3>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#profiles">Health Profiles</a></li>
+                    <li><a href="#download">Download</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="https://github.com/imdela/nutriscore-engine">NutriScore Engine</a></li>
+                    <li><a href="https://github.com/imdela/nutrisafe-api">API Documentation</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="mailto:support@nutrisafe.app">support@nutrisafe.app</a></li>
+                    <li><a href="https://discord.gg/nutrisafe">Discord Community</a></li>
+                    <li><a href="https://github.com/imdela">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 NutriSafe. All rights reserved. Powered by NutriScore Engine.</p>
+        </div>
+    </footer>
+
+    <script src="assets/script.js"></script>
+</body>
+</html>
