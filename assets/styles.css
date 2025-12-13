@@ -35,7 +35,7 @@ header {
     width: 100%;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
-    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     transition: all 0.3s ease;
 }
@@ -81,6 +81,20 @@ nav {
     color: var(--primary);
 }
 
+.nav-nutriscore {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: var(--white) !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.nav-nutriscore:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(26, 188, 156, 0.3);
+    color: var(--white) !important;
+}
+
 .mobile-menu {
     display: none;
     font-size: 1.5rem;
@@ -114,8 +128,13 @@ nav {
 }
 
 @keyframes float {
-    from { transform: translateY(0); }
-    to { transform: translateY(-100px); }
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-100px);
+    }
 }
 
 .hero-content {
@@ -144,11 +163,31 @@ nav {
     animation: fadeInUp 0.8s ease 0.2s backwards;
 }
 
+.powered-by {
+    font-size: 1rem !important;
+    margin-bottom: 2rem !important;
+    opacity: 0.9 !important;
+    font-weight: 500;
+}
+
+.engine-link {
+    color: var(--white);
+    text-decoration: underline;
+    font-weight: 700;
+    transition: opacity 0.3s ease;
+}
+
+.engine-link:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -183,7 +222,7 @@ nav {
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .btn-secondary {
@@ -205,8 +244,13 @@ nav {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .phone-mockup {
@@ -216,14 +260,67 @@ nav {
 }
 
 @keyframes float-phone {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
 }
 
 /* Features Section */
 .features {
     padding: 6rem 2rem;
     background: var(--white);
+}
+
+.engine-highlight {
+    max-width: 900px;
+    margin: 0 auto 4rem;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-radius: 20px;
+    padding: 3rem;
+    text-align: center;
+    color: var(--white);
+    box-shadow: 0 10px 40px rgba(26, 188, 156, 0.3);
+}
+
+.engine-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    letter-spacing: 0.5px;
+}
+
+.engine-content h3 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--white);
+}
+
+.engine-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+    line-height: 1.8;
+}
+
+.engine-content .btn {
+    background: var(--white);
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.engine-content .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .section-title {
@@ -256,14 +353,14 @@ nav {
     background: var(--white);
     padding: 2rem;
     border-radius: 20px;
-    box-shadow: 0 5px 30px rgba(0,0,0,0.08);
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
 }
 
 .feature-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
 }
 
 .feature-icon {
@@ -453,7 +550,7 @@ footer {
 .footer-bottom {
     text-align: center;
     padding-top: 2rem;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     opacity: 0.7;
 }
 
@@ -468,7 +565,7 @@ footer {
         background: var(--white);
         flex-direction: column;
         padding: 2rem;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     }
 
     .nav-links.active {
