@@ -1,0 +1,3 @@
+[submodule "nutriscore"]
+	path = nutriscore
+	url = git@github.com:nutrisafe-app/nutriscore.github.io.git
